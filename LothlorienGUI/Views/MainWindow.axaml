@@ -6,12 +6,12 @@
         mc:Ignorable="d"
         x:Class="LothlorienGUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Width="1024" Height="768"
+        Width="1024" Height="600"
         MinWidth="1024" MinHeight="600"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/lothlorien-logo.ico"
         Title="🌿 Lothlórien | Home Garden Manager"
-        Background="#8DB33A">
+        Background="#4b8f27">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -62,8 +62,8 @@
             </Setter>
         </Style>
         <Style Selector="RadioButton.ViewToggle:checked">
-            <Setter Property="Background" Value="#8DB33A"/>
-            <Setter Property="BorderBrush" Value="#8DB33A"/>
+            <Setter Property="Background" Value="#4b8f27"/>
+            <Setter Property="BorderBrush" Value="#4b8f27"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style Selector="RadioButton.ViewToggle:pointerover">
@@ -203,7 +203,7 @@
         <Border Grid.Column="2"
                 Background="White"
                 CornerRadius="16"
-                BorderBrush="#8DB33A"
+                BorderBrush="#4b8f27"
                 BorderThickness="2"
                 BoxShadow="0 6 24 0 #33000000">
 
@@ -260,28 +260,34 @@
                               IsVisible="{Binding IsCardView}"
                               Padding="16">
                     <WrapPanel Orientation="Horizontal">
-
                         <!-- card placeholder -->
-                        <Border Width="180" Height="130"
-                                Background="#F4F9EE"
-                                CornerRadius="12"
-                                Margin="8"
-                                BorderBrush="#D0E8B0"
-                                BorderThickness="1"
-                                BoxShadow="0 2 8 0 #14000000">
-                            <StackPanel VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        Spacing="6">
-                                <TextBlock Text="🌿"
-                                           FontSize="26"
-                                           HorizontalAlignment="Center"/>
-                                <TextBlock Text="Add a plant"
-                                           FontSize="12"
-                                           Foreground="#90B070"
-                                           HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </Border>
-
+                            <Border Width="180" Height="130"
+                                    Background="#F4F9EE"
+                                    CornerRadius="12"
+                                    Margin="8"
+                                    BorderBrush="#D0E8B0"
+                                    BorderThickness="1"
+                                    BoxShadow="0 2 8 0 #14000000">
+                                <Button Name="AddOnPlantButton"
+                                        Click="AddOnPlantButton_OnClick"
+                                        Width="180" Height="130"
+                                        CornerRadius="12"
+                                        Background="Transparent"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                    <StackPanel VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Spacing="6">
+                                        <TextBlock Text="🌿"
+                                                   FontSize="26"
+                                                   HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Add a plant"
+                                                   FontSize="12"
+                                                   Foreground="#90B070"
+                                                   HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </Border>
                     </WrapPanel>
                 </ScrollViewer>
 

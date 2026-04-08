@@ -1,0 +1,98 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="450" Height="500"
+        CanResize="False"
+        CanMaximize="False"
+        WindowStartupLocation="CenterOwner"
+        x:Class="LothlorienGUI.Views.AddPlantWindow"
+        Title="🌿 Add a new plant"
+        Background="#4b8f27">
+    
+    <!-- grid definition-->
+    <Border Background="White"
+            Margin="16"
+            CornerRadius="16"
+            BorderBrush="#4b8f27"
+            BorderThickness="2"
+            BoxShadow="0 6 24 0 #33000000">
+        <Grid RowDefinitions="Auto,*,*,56">
+            <!-- title -->
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        Margin="18,18,14,14"
+                        Spacing="10"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                
+                <Border Background="#FFE52A"
+                        CornerRadius="100"
+                        Height="65"
+                        Width="65"
+                        BoxShadow="0 2 10 0 #22000000">
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Spacing="4">
+                        <Image Source="/Assets/lothlorien-logo.ico"
+                               Width="34" Height="34"
+                               VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <TextBlock Text="Got a new friend ?"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           Foreground="#3A5A2A"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+            
+            <!-- separator -->
+            <Border Grid.Row="0"
+                    Height="1"
+                    Background="#EEEEEE"
+                    VerticalAlignment="Bottom"
+                    Margin="20,0"/>
+        
+            <!-- plant info area -->
+            <StackPanel Grid.Row="1" Margin="20" Spacing="10">
+                <TextBlock Text="Plant name/variety :" />
+                <TextBox Name="PlantNameInput" />
+                
+                <TextBlock Text="Purchase date :" />
+                <TextBox Name="PlantPurchaseDateInput" />
+                
+                <TextBlock Text="Placement :" />
+                <ComboBox Name="LocationPicker" PlaceholderText="Choose a location" HorizontalAlignment="Stretch">
+                    <ComboBoxItem>Living Room</ComboBoxItem>
+                    <ComboBoxItem>Kitchen</ComboBoxItem>
+                    <ComboBoxItem>Bedroom</ComboBoxItem>
+                    <ComboBoxItem>Dining Room</ComboBoxItem>
+                    <ComboBoxItem>Rest Room</ComboBoxItem>
+                    <ComboBoxItem>Office</ComboBoxItem>
+                    <ComboBoxItem>Balcony</ComboBoxItem>
+                    <ComboBoxItem>Garden</ComboBoxItem>
+                </ComboBox>
+                
+                <TextBlock Text="Exposure level :" />
+                <StackPanel Orientation="Horizontal"
+                            Spacing="10">
+                    <RadioButton Content="☀️" />
+                    <RadioButton Content="🌤️" />
+                    <RadioButton Content="🌥️" />
+                </StackPanel>
+        
+                <Button Content="Save and add plant"
+                        Background="#4b8f27"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="14"
+                        Padding="20,10"
+                        CornerRadius="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        />
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
