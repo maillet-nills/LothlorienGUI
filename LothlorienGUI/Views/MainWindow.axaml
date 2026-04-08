@@ -3,18 +3,303 @@
         xmlns:vm="using:LothlorienGUI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
         x:Class="LothlorienGUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        Width="1024" Height="768"
+        MinWidth="1024" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
         Icon="/Assets/lothlorien-logo.ico"
-        Title="LothlorienGUI">
+        Title="🌿 Lothlórien | Home Garden Manager"
+        Background="#8DB33A">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Window.Styles>
 
+        <!-- nav items style -->
+        <Style Selector="Button.NavItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Foreground" Value="#4A5A3A"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.NavItem:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#E4EDD0"/>
+        </Style>
+        <Style Selector="Button.NavItem:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#D5E3B8"/>
+        </Style>
+
+        <!-- carrd & list view radio buttons style -->
+        <Style Selector="RadioButton.ViewToggle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Foreground" Value="#888"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="RadioButton.ViewToggle:checked">
+            <Setter Property="Background" Value="#8DB33A"/>
+            <Setter Property="BorderBrush" Value="#8DB33A"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="RadioButton.ViewToggle:pointerover">
+            <Setter Property="Background" Value="#E8F0D8"/>
+            <Setter Property="BorderBrush" Value="#AACF60"/>
+        </Style>
+
+    </Window.Styles>
+
+    <!-- layout = nav panel / gap / main panel -->
+    <Grid Margin="16" ColumnDefinitions="300,12,*">
+
+        <!-- ══════════════════════════════════════════
+             NAV PANEL
+        ══════════════════════════════════════════ -->
+        <Border Grid.Column="0"
+                Background="#FAF6ED"
+                CornerRadius="16"
+                BoxShadow="0 6 24 0 #33000000">
+
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <!-- logo & app name -->
+                <StackPanel Grid.Row="0"
+                            Orientation="Horizontal"
+                            Margin="18,18,14,14"
+                            Spacing="10"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                    <Border Background="#FFE52A"
+                            CornerRadius="100"
+                            Height="45"
+                            Width="45"
+                            BoxShadow="0 2 10 0 #22000000">
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Spacing="4">
+                            <Image Source="/Assets/lothlorien-logo.ico"
+                                   Width="34" Height="34"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+                        
+                    </Border>
+                    <TextBlock Text="Lothlórien"
+                               FontWeight="Bold"
+                               FontSize="16"
+                               Foreground="#3A5A2A"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- separator -->
+                <Border Grid.Row="0"
+                        Height="1"
+                        Background="#E0D9C4"
+                        Margin="14,0"
+                        VerticalAlignment="Bottom"/>
+
+                <!-- nav items -->
+                <StackPanel Grid.Row="1"
+                            Margin="10,16,10,0"
+                            Spacing="2">
+
+                    <TextBlock Text="NAVIGATION"
+                               FontSize="9"
+                               FontWeight="Bold"
+                               Foreground="#B0A892"
+                               Margin="10,0,0,10"
+                               LetterSpacing="1.5"/>
+
+                    <!-- active sections -->
+                    <Button Classes="NavItem">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Image Source="/Assets/garden-icon.ico"
+                                   Width="16" Height="16"
+                                   VerticalAlignment="Center"/>
+                            <TextBlock Text="My Garden" 
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- future sections (not enabled yet) -->
+                    <Button Classes="NavItem" IsEnabled="False" Opacity="0.4">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Image Source="/Assets/material-icon.ico"
+                                   Width="16" Height="16"
+                                   VerticalAlignment="Center"/>
+                            <TextBlock Text="Materials" 
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Classes="NavItem" IsEnabled="False" Opacity="0.4">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Image Source="/Assets/statistics-icon.png"
+                                   Width="16" Height="16"
+                                   VerticalAlignment="Center"/>
+                            <TextBlock Text="Statistics" 
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+
+                <!-- "collection" widget -->
+                <StackPanel Grid.Row="2" Margin="12,0,12,18">
+                    <Border Background="#FFE52A"
+                            CornerRadius="12"
+                            Height="100"
+                            BoxShadow="0 2 10 0 #22000000">
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Spacing="4">
+                            <TextBlock Text="Collection"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="#5A4A1A"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,8"/>
+                            <TextBlock Text="🌱"
+                                       FontSize="24"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding PlantCount, StringFormat='{}{0} plant(s)'}"
+                                       FontWeight="Bold"
+                                       FontSize="13"
+                                       HorizontalAlignment="Center"
+                                       Foreground="#5A4A1A"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <!-- ══════════════════════════════════════════
+             MAIN PANEL
+        ══════════════════════════════════════════ -->
+        <Border Grid.Column="2"
+                Background="White"
+                CornerRadius="16"
+                BorderBrush="#8DB33A"
+                BorderThickness="2"
+                BoxShadow="0 6 24 0 #33000000">
+
+            <Grid RowDefinitions="56,*">
+
+                <!-- title & toggle buttons -->
+                <Grid Grid.Row="0"
+                      Margin="20,0" 
+                      ColumnDefinitions="*,Auto,*">
+
+                    <!-- title -->
+                    <TextBlock Grid.Column="1" 
+                               Text="Your Garden"
+                               FontSize="17"
+                               FontWeight="SemiBold"
+                               Foreground="#3A5A2A"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+
+                    <!-- toggle card / list view buttons -->
+                    <StackPanel Grid.Column="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Spacing="4">
+
+                        <RadioButton Classes="ViewToggle"
+                                     GroupName="ViewMode"
+                                     IsChecked="{Binding IsCardView}"
+                                     ToolTip.Tip="Vue en cartes">
+                            <TextBlock Text="⊞" FontSize="16"/>
+                        </RadioButton>
+
+                        <RadioButton Classes="ViewToggle"
+                                     GroupName="ViewMode"
+                                     IsChecked="{Binding IsListView}"
+                                     ToolTip.Tip="Vue en liste">
+                            <TextBlock Text="☰" FontSize="16"/>
+                        </RadioButton>
+
+                    </StackPanel>
+
+                </Grid>
+
+                <!-- separator -->
+                <Border Grid.Row="0"
+                        Height="1"
+                        Background="#EEEEEE"
+                        VerticalAlignment="Bottom"
+                        Margin="20,0"/>
+
+                <!-- card view -->
+                <ScrollViewer Grid.Row="1"
+                              IsVisible="{Binding IsCardView}"
+                              Padding="16">
+                    <WrapPanel Orientation="Horizontal">
+
+                        <!-- card placeholder -->
+                        <Border Width="180" Height="130"
+                                Background="#F4F9EE"
+                                CornerRadius="12"
+                                Margin="8"
+                                BorderBrush="#D0E8B0"
+                                BorderThickness="1"
+                                BoxShadow="0 2 8 0 #14000000">
+                            <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Spacing="6">
+                                <TextBlock Text="🌿"
+                                           FontSize="26"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="Add a plant"
+                                           FontSize="12"
+                                           Foreground="#90B070"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                    </WrapPanel>
+                </ScrollViewer>
+
+                <!-- list view -->
+                <ScrollViewer Grid.Row="1"
+                              IsVisible="{Binding IsListView}"
+                              Padding="20,12">
+                    <StackPanel>
+                        <TextBlock Text="No plants at the moment. 🌿"
+                                   Foreground="#C0C8B0"
+                                   FontSize="14"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,40,0,0"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+            </Grid>
+        </Border>
+
+    </Grid>
 </Window>
