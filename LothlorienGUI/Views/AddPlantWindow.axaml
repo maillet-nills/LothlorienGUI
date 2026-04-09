@@ -3,42 +3,82 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        Width="450" Height="500"
+        Width="450" Height="600"
         CanResize="False"
         CanMaximize="False"
         WindowStartupLocation="CenterOwner"
         x:Class="LothlorienGUI.Views.AddPlantWindow"
         Title="🌿 Add a new plant"
         Background="#4b8f27">
-    
-    <!-- grid definition-->
+
+    <Window.Styles>
+        <Style Selector="RadioButton.ExposureOption">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="#F4F9EE"
+                            BorderBrush="#D0E8B0"
+                            BorderThickness="1.5"
+                            CornerRadius="10"
+                            Width="60" Height="60"
+                            BoxShadow="0 2 8 0 #14000000">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="RadioButton.ExposureOption:checked /template/ Border">
+            <Setter Property="Background" Value="#E2F2C8"/>
+            <Setter Property="BorderBrush" Value="#8DB33A"/>
+            <Setter Property="BorderThickness" Value="2.5"/>
+        </Style>
+
+        <Style Selector="RadioButton.ExposureOption:pointerover /template/ Border">
+            <Setter Property="Background" Value="#EBF5D8"/>
+            <Setter Property="BorderBrush" Value="#AACF60"/>
+        </Style>
+        
+        <Style Selector="NumericUpDown.Borderless">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="NumericUpDown.Borderless /template/ ButtonSpinner">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="NumericUpDown.Borderless /template/ ButtonSpinner /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Window.Styles>
+
     <Border Background="White"
             Margin="16"
             CornerRadius="16"
             BorderBrush="#4b8f27"
             BorderThickness="2"
             BoxShadow="0 6 24 0 #33000000">
+
         <Grid RowDefinitions="Auto,*,*,56">
+
             <!-- title -->
             <StackPanel Grid.Row="0"
                         Orientation="Horizontal"
-                        Margin="18,18,14,14"
+                        Margin="18,14,14,14"
                         Spacing="10"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                
                 <Border Background="#FFE52A"
                         CornerRadius="100"
-                        Height="65"
-                        Width="65"
+                        Height="45" Width="45"
                         BoxShadow="0 2 10 0 #22000000">
-                    <StackPanel VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Spacing="4">
-                        <Image Source="/Assets/lothlorien-logo.ico"
-                               Width="34" Height="34"
-                               VerticalAlignment="Center"/>
-                    </StackPanel>
+                    <Image Source="/Assets/lothlorien-logo.ico"
+                           Width="34" Height="34"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
                 </Border>
                 <TextBlock Text="Got a new friend ?"
                            FontWeight="Bold"
@@ -46,24 +86,25 @@
                            Foreground="#3A5A2A"
                            VerticalAlignment="Center"/>
             </StackPanel>
-            
-            <!-- separator -->
+
             <Border Grid.Row="0"
-                    Height="1"
-                    Background="#EEEEEE"
-                    VerticalAlignment="Bottom"
-                    Margin="20,0"/>
-        
-            <!-- plant info area -->
-            <StackPanel Grid.Row="1" Margin="20" Spacing="10">
-                <TextBlock Text="Plant name/variety :" />
-                <TextBox Name="PlantNameInput" />
-                
-                <TextBlock Text="Purchase date :" />
-                <TextBox Name="PlantPurchaseDateInput" />
-                
-                <TextBlock Text="Placement :" />
-                <ComboBox Name="LocationPicker" PlaceholderText="Choose a location" HorizontalAlignment="Stretch">
+                    Height="1" Background="#EEEEEE"
+                    VerticalAlignment="Bottom" Margin="20,0"/>
+
+            <!-- plant infos -->
+            <StackPanel Grid.Row="1" Margin="20,14,20,10" Spacing="8">
+
+                <TextBlock Text="Plant name/variety :" FontSize="13"/>
+                <TextBox Name="PlantNameInput"/>
+
+                <TextBlock Text="Purchase date :" FontSize="13"/>
+                <DatePicker Name="PlantPurchaseDateInput"
+                            HorizontalAlignment="Stretch"/>
+
+                <TextBlock Text="Placement :" FontSize="13"/>
+                <ComboBox Name="LocationPicker"
+                          PlaceholderText="Choose a location"
+                          HorizontalAlignment="Stretch">
                     <ComboBoxItem>Living Room</ComboBoxItem>
                     <ComboBoxItem>Kitchen</ComboBoxItem>
                     <ComboBoxItem>Bedroom</ComboBoxItem>
@@ -73,16 +114,99 @@
                     <ComboBoxItem>Balcony</ComboBoxItem>
                     <ComboBoxItem>Garden</ComboBoxItem>
                 </ComboBox>
-                
-                <TextBlock Text="Exposure level :" />
-                <StackPanel Orientation="Horizontal"
-                            Spacing="10">
-                    <RadioButton Content="☀️" />
-                    <RadioButton Content="🌤️" />
-                    <RadioButton Content="🌥️" />
-                </StackPanel>
-        
+
+            </StackPanel>
+
+            <Border Grid.Row="1"
+                    Height="1" Background="#EEEEEE"
+                    VerticalAlignment="Bottom" Margin="20,0"/>
+
+            <!-- exposure & watering -->
+            <StackPanel Grid.Row="2" Margin="20,14,20,10" Spacing="12" VerticalAlignment="Center">
+
+                <!-- exposure -->
+                <TextBlock Text="Exposure level :" FontSize="13"/>
+                <Grid ColumnDefinitions="*,*,*">
+                    <RadioButton Grid.Column="0"
+                                 Classes="ExposureOption"
+                                 GroupName="Exposure"
+                                 Name="FullSunRadioButton"
+                                 HorizontalAlignment="Center"
+                                 ToolTip.Tip="Full sun">
+                        <TextBlock Text="☀️" FontSize="20"/>
+                    </RadioButton>
+                    <RadioButton Grid.Column="1"
+                                 Classes="ExposureOption"
+                                 GroupName="Exposure"
+                                 Name="PartialSunRadioButton"
+                                 HorizontalAlignment="Center"
+                                 ToolTip.Tip="Partial sun">
+                        <TextBlock Text="🌤️" FontSize="20"/>
+                    </RadioButton>
+                    <RadioButton Grid.Column="2"
+                                 Classes="ExposureOption"
+                                 GroupName="Exposure"
+                                 Name="LowSunRadioButton"
+                                 HorizontalAlignment="Center"
+                                 ToolTip.Tip="Low light">
+                        <TextBlock Text="🌥️" FontSize="20"/>
+                    </RadioButton>
+                </Grid>
+
+                <!-- watering frequency -->
+                <TextBlock Text="Watering frequency :" FontSize="13"/>
+                <Border Background="#F4F9EE"
+                        BorderBrush="#D0E8B0"
+                        BorderThickness="1.5"
+                        CornerRadius="10"
+                        Padding="14,10">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+
+                        <!-- icons -->
+                        <Ellipse Grid.Column="0"
+                                 Width="10" Height="10"
+                                 Fill="DodgerBlue"
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,10,0"/>
+                        
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center">
+                            <TextBlock FontSize="11"
+                                       Foreground="#888"
+                                       Text="Every"/>
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock FontSize="15"
+                                           FontWeight="Bold"
+                                           Foreground="#3A5A2A"
+                                           Text="{Binding #WateringFrequencyInput.Value, StringFormat='{}{0:0}'}"/>
+                                <TextBlock FontSize="15"
+                                           Foreground="#3A5A2A"
+                                           Text="days"/>
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        <NumericUpDown Grid.Column="2"
+                                       Classes="Borderless"
+                                       Name="WateringFrequencyInput"
+                                       Minimum="1" Maximum="90"
+                                       Value="7" Increment="1"
+                                       FormatString="0"
+                                       Width="80"
+                                       VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+            </StackPanel>
+
+            <Border Grid.Row="2"
+                    Height="1" Background="#EEEEEE"
+                    VerticalAlignment="Bottom" Margin="20,0"/>
+
+            <!-- save & add button -->
+            <StackPanel Grid.Row="3" Margin="20">
                 <Button Content="Save and add plant"
+                        Name="AddPlantButton"
+                        Click="AddPlantButton_OnClick"
                         Background="#4b8f27"
                         Foreground="White"
                         FontWeight="Bold"
@@ -90,9 +214,9 @@
                         Padding="20,10"
                         CornerRadius="5"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        />
+                        VerticalAlignment="Center"/>
             </StackPanel>
+
         </Grid>
     </Border>
 </Window>
