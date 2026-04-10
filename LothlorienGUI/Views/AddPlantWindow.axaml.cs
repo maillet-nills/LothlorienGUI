@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -7,6 +8,12 @@ namespace LothlorienGUI.Views;
 
 public partial class AddPlantWindow : Window
 {
+    public string plantName { get; private set; } = "";
+    public DateTimeOffset? purchaseDate { get; private set; }
+    public string plantLocation { get; private set; } = "";
+    public string plantExposure { get; private set; } = "";
+    public int wateringFrequency { get; private set; } = 7;
+    public bool confirmed { get; private set; } = false;
     
     public AddPlantWindow()
     {
@@ -15,6 +22,21 @@ public partial class AddPlantWindow : Window
 
     private void AddPlantButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        plantName = PlantNameInput.Text ?? "";
+        purchaseDate = PlantPurchaseDateInput.SelectedDate;
+        plantLocation = LocationPicker.SelectedItem?.ToString() ?? "";
+        
+        if (FullSunRadioButton.IsChecked == true)
+            plantExposure = "Full sun";
+        else if (PartialSunRadioButton.IsChecked == true)
+            plantExposure = "Partial sun";
+        else if (LowSunRadioButton.IsChecked == true)
+            plantExposure = "Low light";
+
+        wateringFrequency = (int)(WateringFrequencyInput.Value ?? 7);
+        
+        confirmed = true;
+        
+        Close();
     }
 }
