@@ -259,9 +259,10 @@
                 <ScrollViewer Grid.Row="1"
                               IsVisible="{Binding IsCardView}"
                               Padding="16">
-                    <WrapPanel Orientation="Horizontal">
+                    <WrapPanel Orientation="Horizontal"
+                               Name="CardPanel">
                         <!-- card placeholder -->
-                            <Border Width="180" Height="130"
+                            <Border Width="180" Height="180"
                                     Background="#F4F9EE"
                                     CornerRadius="12"
                                     Margin="8"
@@ -270,7 +271,7 @@
                                     BoxShadow="0 2 8 0 #14000000">
                                 <Button Name="AddOnPlantButton"
                                         Click="AddOnPlantButton_OnClick"
-                                        Width="180" Height="130"
+                                        Width="180" Height="180"
                                         CornerRadius="12"
                                         Background="Transparent"
                                         VerticalAlignment="Center"
@@ -282,7 +283,7 @@
                                                    FontSize="26"
                                                    HorizontalAlignment="Center"/>
                                         <TextBlock Text="Add a plant"
-                                                   FontSize="12"
+                                                   FontSize="13"
                                                    Foreground="#90B070"
                                                    HorizontalAlignment="Center"/>
                                     </StackPanel>

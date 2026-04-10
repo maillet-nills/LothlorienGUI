@@ -24,7 +24,7 @@ public partial class AddPlantWindow : Window
     {
         plantName = PlantNameInput.Text ?? "";
         purchaseDate = PlantPurchaseDateInput.SelectedDate;
-        plantLocation = LocationPicker.SelectedItem?.ToString() ?? "";
+        plantLocation = (LocationPicker.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "";
         
         if (FullSunRadioButton.IsChecked == true)
             plantExposure = "Full sun";
