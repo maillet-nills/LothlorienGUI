@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/lothlorien-logo.ico"
         Title="🌿 Lothlórien | Home Garden Manager"
-        Background="#4b8f27">
+        Background="{StaticResource BrushCanopy}">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -38,14 +38,14 @@
             <Setter Property="Background" Value="#D5E3B8"/>
         </Style>
 
-        <!-- carrd & list view radio buttons style -->
+        <!-- card & list view radio buttons style -->
         <Style Selector="RadioButton.ViewToggle">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="#CCCCCC"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="6"/>
             <Setter Property="Padding" Value="8,4"/>
-            <Setter Property="Foreground" Value="#888"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushStoneGray}"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <ControlTemplate>
@@ -62,8 +62,8 @@
             </Setter>
         </Style>
         <Style Selector="RadioButton.ViewToggle:checked">
-            <Setter Property="Background" Value="#4b8f27"/>
-            <Setter Property="BorderBrush" Value="#4b8f27"/>
+            <Setter Property="Background" Value="{StaticResource BrushCanopy}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushCanopy}"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style Selector="RadioButton.ViewToggle:pointerover">
@@ -80,7 +80,7 @@
              NAV PANEL
         ══════════════════════════════════════════ -->
         <Border Grid.Column="0"
-                Background="#FAF6ED"
+                Background="{StaticResource BrushParchment}"
                 CornerRadius="16"
                 BoxShadow="0 6 24 0 #33000000">
 
@@ -93,7 +93,7 @@
                             Spacing="10"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left">
-                    <Border Background="#FFE52A"
+                    <Border Background="{StaticResource BrushGoldenLight}"
                             CornerRadius="100"
                             Height="45"
                             Width="45"
@@ -110,7 +110,7 @@
                     <TextBlock Text="Lothlórien"
                                FontWeight="Bold"
                                FontSize="16"
-                               Foreground="#3A5A2A"
+                               Foreground="{StaticResource BrushDeepForest}"
                                VerticalAlignment="Center"/>
                 </StackPanel>
 
@@ -169,7 +169,7 @@
 
                 <!-- "collection" widget -->
                 <StackPanel Grid.Row="2" Margin="12,0,12,18">
-                    <Border Background="#FFE52A"
+                    <Border Background="{StaticResource BrushGoldenLight}"
                             CornerRadius="12"
                             Height="100"
                             BoxShadow="0 2 10 0 #22000000">
@@ -203,7 +203,7 @@
         <Border Grid.Column="2"
                 Background="White"
                 CornerRadius="16"
-                BorderBrush="#4b8f27"
+                BorderBrush="{StaticResource BrushCanopy}"
                 BorderThickness="2"
                 BoxShadow="0 6 24 0 #33000000">
 
@@ -219,7 +219,7 @@
                                Text="Your Garden"
                                FontSize="17"
                                FontWeight="SemiBold"
-                               Foreground="#3A5A2A"
+                               Foreground="{StaticResource BrushDeepForest}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
 
@@ -263,10 +263,10 @@
                                Name="CardPanel">
                         <!-- card placeholder -->
                             <Border Width="180" Height="180"
-                                    Background="#F4F9EE"
+                                    Background="{StaticResource BrushElvenMist}"
                                     CornerRadius="12"
                                     Margin="8"
-                                    BorderBrush="#D0E8B0"
+                                    BorderBrush="{StaticResource BrushMoss}"
                                     BorderThickness="1"
                                     BoxShadow="0 2 8 0 #14000000">
                                 <Button Name="AddOnPlantButton"

@@ -3,13 +3,39 @@
              x:Class="LothlorienGUI.App"
              xmlns:local="using:LothlorienGUI"
              RequestedThemeVariant="Light">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
-    <Application.DataTemplates>
-        <local:ViewLocator/>
-    </Application.DataTemplates>
-  
-    <Application.Styles>
-        <FluentTheme />
-    </Application.Styles>
+             <Application.Resources>
+                 <!-- Greens -->
+                 <Color x:Key="ColorDeepForest">#2d5a1b</Color>
+                 <Color x:Key="ColorCanopy">#4b8f27</Color>
+                 <Color x:Key="ColorLeafGreen">#7ab648</Color>
+                 <Color x:Key="ColorMoss">#d0e8b0</Color>
+                 <Color x:Key="ColorElvenMist">#f4f9ee</Color>
+
+                 <!-- Elven gold -->
+                 <Color x:Key="ColorGaladrielGold">#c8a000</Color>
+                 <Color x:Key="ColorGoldenLight">#ffe52a</Color>
+
+                 <!-- Neutrals -->
+                 <Color x:Key="ColorParchment">#faf6ed</Color>
+                 <Color x:Key="ColorStoneGray">#888888</Color>
+
+                 <!-- SolidColorBrush wrappers -->
+                 <SolidColorBrush x:Key="BrushCanopy" Color="{StaticResource ColorCanopy}"/>
+                 <SolidColorBrush x:Key="BrushDeepForest" Color="{StaticResource ColorDeepForest}"/>
+                 <SolidColorBrush x:Key="BrushLeafGreen" Color="{StaticResource ColorLeafGreen}"/>
+                 <SolidColorBrush x:Key="BrushMoss" Color="{StaticResource ColorMoss}"/>
+                 <SolidColorBrush x:Key="BrushElvenMist" Color="{StaticResource ColorElvenMist}"/>
+                 <SolidColorBrush x:Key="BrushGoldenLight" Color="{StaticResource ColorGoldenLight}"/>
+                 <SolidColorBrush x:Key="BrushParchment" Color="{StaticResource ColorParchment}"/>
+                 <SolidColorBrush x:Key="BrushStoneGray" Color="{StaticResource ColorStoneGray}"/>
+             </Application.Resources>
+    
+        <Application.DataTemplates>
+            <local:ViewLocator/>
+        </Application.DataTemplates>
+      
+        <Application.Styles>
+            <FluentTheme />
+        </Application.Styles>
 </Application>

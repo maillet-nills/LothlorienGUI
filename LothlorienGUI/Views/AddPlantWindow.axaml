@@ -8,8 +8,9 @@
         CanMaximize="False"
         WindowStartupLocation="CenterOwner"
         x:Class="LothlorienGUI.Views.AddPlantWindow"
+        Icon="/Assets/lothlorien-logo.ico"
         Title="🌿 Add a new plant"
-        Background="#4b8f27">
+        Background="{StaticResource BrushCanopy}">
 
     <Window.Styles>
         <Style Selector="RadioButton.ExposureOption">
@@ -58,7 +59,7 @@
     <Border Background="White"
             Margin="16"
             CornerRadius="16"
-            BorderBrush="#4b8f27"
+            BorderBrush="{StaticResource BrushCanopy}"
             BorderThickness="2"
             BoxShadow="0 6 24 0 #33000000">
 
@@ -71,7 +72,7 @@
                         Spacing="10"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                <Border Background="#FFE52A"
+                <Border Background="{StaticResource BrushGoldenLight}"
                         CornerRadius="100"
                         Height="45" Width="45"
                         BoxShadow="0 2 10 0 #22000000">
@@ -83,7 +84,7 @@
                 <TextBlock Text="Got a new friend ?"
                            FontWeight="Bold"
                            FontSize="16"
-                           Foreground="#3A5A2A"
+                           Foreground="{StaticResource BrushDeepForest}"
                            VerticalAlignment="Center"/>
             </StackPanel>
 
@@ -172,7 +173,7 @@
                         <StackPanel Grid.Column="1"
                                     VerticalAlignment="Center">
                             <TextBlock FontSize="11"
-                                       Foreground="#888"
+                                       Foreground="{StaticResource BrushStoneGray}"
                                        Text="Every"/>
                             <StackPanel Orientation="Horizontal" Spacing="4">
                                 <TextBlock FontSize="15"
@@ -207,7 +208,7 @@
                 <Button Content="Save and add plant"
                         Name="AddPlantButton"
                         Click="AddPlantButton_OnClick"
-                        Background="#4b8f27"
+                        Background="{StaticResource BrushCanopy}"
                         Foreground="White"
                         FontWeight="Bold"
                         FontSize="14"
