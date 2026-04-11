@@ -61,6 +61,8 @@ public partial class MainWindow : Window
             nameText.FontWeight = FontWeight.Bold;
             nameText.Foreground = new SolidColorBrush(Color.Parse("#3A5A2A"));
             nameText.HorizontalAlignment = HorizontalAlignment.Center;
+            nameText.TextAlignment = TextAlignment.Center;
+            nameText.TextWrapping = TextWrapping.Wrap;
 
             var locationText = new TextBlock();
             locationText.Text = plantLocations[index];

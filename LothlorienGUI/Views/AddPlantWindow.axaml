@@ -96,7 +96,8 @@
             <StackPanel Grid.Row="1" Margin="20,14,20,10" Spacing="8">
 
                 <TextBlock Text="Plant name/variety :" FontSize="13"/>
-                <TextBox Name="PlantNameInput"/>
+                <TextBox Name="PlantNameInput"
+                         MaxLength="39"/>
 
                 <TextBlock Text="Purchase date :" FontSize="13"/>
                 <DatePicker Name="PlantPurchaseDateInput"
