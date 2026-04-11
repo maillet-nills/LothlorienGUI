@@ -37,6 +37,7 @@ public partial class MainWindow : Window
             plantCard.BoxShadow = BoxShadows.Parse("0 2 8 0 #14000000");
 
             var plantCardButton = new Button();
+            plantCardButton.Click += DisplayPlantInfo_OnClick;
             plantCardButton.Width = 180;
             plantCardButton.Height = 180;
             plantCardButton.CornerRadius = new CornerRadius(12);
@@ -80,6 +81,8 @@ public partial class MainWindow : Window
             plantCardContent.Children.Add(locationText);
             plantCardContent.Children.Add(dateText);
 
+            plantCardButton.Tag = index;
+
             return plantCard;
     }
 
@@ -97,20 +100,28 @@ public partial class MainWindow : Window
             plantExposures[plantTotal] = plantInputWindow.plantExposure;
             plantWateringFrequencies[plantTotal] = plantInputWindow.wateringFrequency;
             
-            Console.WriteLine("=== New plant added ===");
-            Console.WriteLine($"Name/ variety : {plantNames[plantTotal]}");
-            Console.WriteLine($"Purchased Date : {plantDates[plantTotal]}");
-            Console.WriteLine($"Location : {plantLocations[plantTotal]}");
-            Console.WriteLine($"Watering : every {plantWateringFrequencies[plantTotal]} days");
-            Console.WriteLine($"Exposure : {plantExposures[plantTotal]}");
-            
             plantTotal++;
-            Console.WriteLine($"Plant total : {plantTotal}");
             
             if (DataContext is MainWindowViewModel vm)
                 vm.PlantCount = plantTotal;
             
             CardPanel.Children.Add(CreatePlantCard(plantTotal - 1));
         }
+    }
+
+    private async void DisplayPlantInfo_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var button = sender as Button;
+        var index = (int)button?.Tag;
+
+        var plantInfoWindow = new PlantInfoWindow(
+            plantNames[index], 
+            plantDates[index], 
+            plantLocations[index], 
+            plantExposures[index], 
+            plantWateringFrequencies[index]);
+
+        await plantInfoWindow.ShowDialog(this);
+
     }
 }

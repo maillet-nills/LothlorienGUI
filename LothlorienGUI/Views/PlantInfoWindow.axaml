@@ -1,0 +1,119 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="450" Height="600"
+        CanResize="False"
+        CanMaximize="False"
+        WindowStartupLocation="CenterOwner"
+        x:Class="LothlorienGUI.Views.PlantInfoWindow"
+        Title="🌿 Add a new plant"
+        Background="#4b8f27">
+
+    <Window.Styles>
+        <Style Selector="RadioButton.ExposureOption">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="#F4F9EE"
+                            BorderBrush="#D0E8B0"
+                            BorderThickness="1.5"
+                            CornerRadius="10"
+                            Width="60" Height="60"
+                            BoxShadow="0 2 8 0 #14000000">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="RadioButton.ExposureOption:checked /template/ Border">
+            <Setter Property="Background" Value="#E2F2C8"/>
+            <Setter Property="BorderBrush" Value="#8DB33A"/>
+            <Setter Property="BorderThickness" Value="2.5"/>
+        </Style>
+
+        <Style Selector="RadioButton.ExposureOption:pointerover /template/ Border">
+            <Setter Property="Background" Value="#EBF5D8"/>
+            <Setter Property="BorderBrush" Value="#AACF60"/>
+        </Style>
+        
+        <Style Selector="NumericUpDown.Borderless">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="NumericUpDown.Borderless /template/ ButtonSpinner">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="NumericUpDown.Borderless /template/ ButtonSpinner /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Window.Styles>
+
+    <Border Background="White"
+            Margin="16"
+            CornerRadius="16"
+            BorderBrush="#4b8f27"
+            BorderThickness="2"
+            BoxShadow="0 6 24 0 #33000000">
+
+        <Grid RowDefinitions="Auto,*">
+
+            <!-- title -->
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        Margin="18,14,14,14"
+                        Spacing="10"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Border Background="#FFE52A"
+                        CornerRadius="100"
+                        Height="45" Width="45"
+                        BoxShadow="0 2 10 0 #22000000">
+                    <Image Source="/Assets/lothlorien-logo.ico"
+                           Width="34" Height="34"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Name="InfoTitleTextblock"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           Foreground="#3A5A2A"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <Border Grid.Row="0"
+                    Height="1" Background="#EEEEEE"
+                    VerticalAlignment="Bottom" Margin="20,0"/>
+
+            <!-- plant infos -->
+            <Grid Grid.Row="1" 
+                  ColumnDefinitions="Auto,*" 
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
+                  Margin="20,14,20,10">
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Name :" FontSize="13" Foreground="#888" Margin="0,0,12,10"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Name="PlantNameTextbox" FontSize="13" FontWeight="Bold" Foreground="#3A5A2A"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Date :" FontSize="13" Foreground="#888" Margin="0,0,12,10"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Name="PlantDateTextbox" FontSize="13" Foreground="#3A5A2A"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Location :" FontSize="13" Foreground="#888" Margin="0,0,12,10"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Name="PlantLocationTextbox" FontSize="13" Foreground="#3A5A2A"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Exposure :" FontSize="13" Foreground="#888" Margin="0,0,12,10"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Name="PlantExposureTextbox" FontSize="13" Foreground="#3A5A2A"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Watering :" FontSize="13" Foreground="#888" Margin="0,0,12,10"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Name="PlantWateringTextbox" FontSize="13" Foreground="#3A5A2A"/>
+
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>
