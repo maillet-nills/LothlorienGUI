@@ -56,7 +56,7 @@
         </Style>
     </Window.Styles>
 
-    <Border Background="White"
+    <Border Background="{StaticResource BrushParchment}"
             Margin="16"
             CornerRadius="16"
             BorderBrush="{StaticResource BrushCanopy}"
@@ -76,7 +76,7 @@
                         CornerRadius="100"
                         Height="45" Width="45"
                         BoxShadow="0 2 10 0 #22000000">
-                    <Image Source="/Assets/lothlorien-logo.ico"
+                    <Image Source="/Assets/lothlorien-logo.png"
                            Width="34" Height="34"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"/>

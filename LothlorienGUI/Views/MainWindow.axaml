@@ -101,7 +101,7 @@
                         <StackPanel VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Spacing="4">
-                            <Image Source="/Assets/lothlorien-logo.ico"
+                            <Image Source="/Assets/lothlorien-logo.png"
                                    Width="34" Height="34"
                                    VerticalAlignment="Center"/>
                         </StackPanel>
@@ -201,7 +201,7 @@
              MAIN PANEL
         ══════════════════════════════════════════ -->
         <Border Grid.Column="2"
-                Background="White"
+                Background="{StaticResource BrushParchment}"
                 CornerRadius="16"
                 BorderBrush="{StaticResource BrushCanopy}"
                 BorderThickness="2"
