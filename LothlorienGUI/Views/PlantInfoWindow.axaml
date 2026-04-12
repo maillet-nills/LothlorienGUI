@@ -224,6 +224,19 @@
                         CornerRadius="5"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"/>
+                
+                <Button Content="Save"
+                        IsVisible="False"
+                        Name="SavePlantButton"
+                        Click="SavePlantButton_OnClick"
+                        Background="{StaticResource BrushCanopy}"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="14"
+                        Padding="20,10"
+                        CornerRadius="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
             </StackPanel>
 
         </Grid>

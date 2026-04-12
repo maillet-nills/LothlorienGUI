@@ -117,6 +117,7 @@ public partial class MainWindow : Window
         var index = (int)button?.Tag;
 
         var plantInfoWindow = new PlantInfoWindow(
+            index,
             plantNames[index], 
             plantDates[index], 
             plantLocations[index], 
@@ -124,6 +125,15 @@ public partial class MainWindow : Window
             plantWateringFrequencies[index]);
 
         await plantInfoWindow.ShowDialog(this);
+
+        if (plantInfoWindow.confirmed)
+        {
+            plantNames[index] = plantInfoWindow.plantName;
+            plantDates[index] = plantInfoWindow.purchaseDate ?? DateTimeOffset.Now;
+            plantLocations[index] = plantInfoWindow.plantLocation;
+            plantExposures[index] = plantInfoWindow.plantExposure;
+            plantWateringFrequencies[index] = plantInfoWindow.wateringFrequency;
+        }
 
     }
 }
