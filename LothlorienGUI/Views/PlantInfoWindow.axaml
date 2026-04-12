@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         x:Class="LothlorienGUI.Views.PlantInfoWindow"
         Icon="/Assets/lothlorien-logo.ico"
-        Title="🌿 Add a new plant"
+        Title="🌿 Plant Info"
         Background="{StaticResource BrushCanopy}">
 
     <Window.Styles>
