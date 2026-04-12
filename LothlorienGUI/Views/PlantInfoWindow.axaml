@@ -63,7 +63,7 @@
             BorderThickness="2"
             BoxShadow="0 6 24 0 #33000000">
 
-        <Grid RowDefinitions="Auto,*">
+        <Grid RowDefinitions="Auto,*,*,56">
 
             <!-- title -->
             <StackPanel Grid.Row="0"
@@ -81,7 +81,7 @@
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"/>
                 </Border>
-                <TextBlock Name="InfoTitleTextblock"
+                <TextBlock Name="InfoTitleTextBlock"
                            FontWeight="Bold"
                            FontSize="16"
                            Foreground="{StaticResource BrushDeepForest}"
@@ -93,27 +93,138 @@
                     VerticalAlignment="Bottom" Margin="20,0"/>
 
             <!-- plant infos -->
-            <Grid Grid.Row="1" 
-                  ColumnDefinitions="Auto,*" 
-                  RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
-                  Margin="20,14,20,10">
+            <StackPanel Grid.Row="1" Margin="20,14,20,10" Spacing="8">
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Name :" FontSize="13" Foreground="{StaticResource BrushStoneGray}" Margin="0,0,12,10"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Name="PlantNameTextbox" FontSize="13" FontWeight="Bold" Foreground="#3A5A2A"/>
+                <TextBlock Text="Plant name/variety :" FontSize="13"/>
+                <TextBox Name="PlantNameTextBox"
+                         MaxLength="39"
+                         IsEnabled="False"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Date :" FontSize="13" Foreground="{StaticResource BrushStoneGray}" Margin="0,0,12,10"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Name="PlantDateTextbox" FontSize="13" Foreground="#3A5A2A"/>
+                <TextBlock Text="Purchase date :" FontSize="13"/>
+                <DatePicker Name="PlantDatePicker"
+                            HorizontalAlignment="Stretch"
+                            IsEnabled="False"/>
 
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Location :" FontSize="13" Foreground="{StaticResource BrushStoneGray}" Margin="0,0,12,10"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Name="PlantLocationTextbox" FontSize="13" Foreground="#3A5A2A"/>
+                <TextBlock Text="Placement :" FontSize="13"/>
+                <ComboBox Name="PlantLocationComboBox"
+                          IsEnabled="False"
+                          PlaceholderText="Choose a location"
+                          HorizontalAlignment="Stretch">
+                    <ComboBoxItem>Living Room</ComboBoxItem>
+                    <ComboBoxItem>Kitchen</ComboBoxItem>
+                    <ComboBoxItem>Bedroom</ComboBoxItem>
+                    <ComboBoxItem>Dining Room</ComboBoxItem>
+                    <ComboBoxItem>Rest Room</ComboBoxItem>
+                    <ComboBoxItem>Office</ComboBoxItem>
+                    <ComboBoxItem>Balcony</ComboBoxItem>
+                    <ComboBoxItem>Garden</ComboBoxItem>
+                </ComboBox>
 
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Exposure :" FontSize="13" Foreground="{StaticResource BrushStoneGray}" Margin="0,0,12,10"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" Name="PlantExposureTextbox" FontSize="13" Foreground="#3A5A2A"/>
+            </StackPanel>
 
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Watering :" FontSize="13" Foreground="{StaticResource BrushStoneGray}" Margin="0,0,12,10"/>
-                <TextBlock Grid.Row="4" Grid.Column="1" Name="PlantWateringTextbox" FontSize="13" Foreground="#3A5A2A"/>
+            <Border Grid.Row="1"
+                    Height="1" Background="#EEEEEE"
+                    VerticalAlignment="Bottom" Margin="20,0"/>
 
-            </Grid>
+             <!-- exposure & watering -->
+            <StackPanel Grid.Row="2" Margin="20,14,20,10" Spacing="12" VerticalAlignment="Center">
+
+                <!-- exposure -->
+                <TextBlock Text="Exposure level :" FontSize="13"/>
+                <Grid ColumnDefinitions="*,*,*">
+                    <RadioButton Grid.Column="0"
+                                 Classes="ExposureOption"
+                                 GroupName="Exposure"
+                                 Name="FullSunRadioButton"
+                                 HorizontalAlignment="Center"
+                                 IsHitTestVisible="False"
+                                 ToolTip.Tip="Full sun">
+                        <TextBlock Text="☀️" FontSize="20"/>
+                    </RadioButton>
+                    <RadioButton Grid.Column="1"
+                                 Classes="ExposureOption"
+                                 GroupName="Exposure"
+                                 Name="PartialSunRadioButton"
+                                 HorizontalAlignment="Center"
+                                 IsHitTestVisible="False"
+                                 ToolTip.Tip="Partial sun">
+                        <TextBlock Text="🌤️" FontSize="20"/>
+                    </RadioButton>
+                    <RadioButton Grid.Column="2"
+                                 Classes="ExposureOption"
+                                 GroupName="Exposure"
+                                 Name="LowSunRadioButton"
+                                 HorizontalAlignment="Center"
+                                 IsHitTestVisible="False"
+                                 ToolTip.Tip="Low light">
+                        <TextBlock Text="🌥️" FontSize="20"/>
+                    </RadioButton>
+                </Grid>
+
+                <!-- watering frequency -->
+                <TextBlock Text="Watering frequency :" FontSize="13"/>
+                <Border Background="#F4F9EE"
+                        BorderBrush="#D0E8B0"
+                        BorderThickness="1.5"
+                        CornerRadius="10"
+                        Padding="14,10">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+
+                        <!-- icons -->
+                        <Ellipse Grid.Column="0"
+                                 Width="10" Height="10"
+                                 Fill="DodgerBlue"
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,10,0"/>
+                        
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center">
+                            <TextBlock FontSize="11"
+                                       Foreground="{StaticResource BrushStoneGray}"
+                                       Text="Every"/>
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock Name="PlantWateringTextBlock" FontSize="15"
+                                           FontWeight="Bold"
+                                           Foreground="#3A5A2A"
+                                           Text="{Binding #WateringFrequencyInput.Value, StringFormat='{}{0:0}'}"/>
+                                <TextBlock FontSize="15"
+                                           Foreground="#3A5A2A"
+                                           Text="days"/>
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        <NumericUpDown Grid.Column="2"
+                                       Classes="Borderless"
+                                       Name="WateringFrequencyInput"
+                                       IsHitTestVisible="False"
+                                       Minimum="1" Maximum="90"
+                                       Value="7" Increment="1"
+                                       FormatString="0"
+                                       Width="80"
+                                       VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+            </StackPanel>
+
+            <Border Grid.Row="2"
+                    Height="1" Background="#EEEEEE"
+                    VerticalAlignment="Bottom" Margin="20,0"/>
+
+            <!-- edit button -->
+            <StackPanel Grid.Row="3" Margin="20">
+                <Button Content="Edit"
+                        Name="EditPlantButton"
+                        Click="EditPlantButton_OnClick"
+                        Background="{StaticResource BrushCanopy}"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="14"
+                        Padding="20,10"
+                        CornerRadius="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+            </StackPanel>
 
         </Grid>
     </Border>

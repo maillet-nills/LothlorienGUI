@@ -27,11 +27,11 @@ public partial class AddPlantWindow : Window
         plantLocation = (LocationPicker.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "";
         
         if (FullSunRadioButton.IsChecked == true)
-            plantExposure = "Full sun";
+            plantExposure = "FullSun";
         else if (PartialSunRadioButton.IsChecked == true)
-            plantExposure = "Partial sun";
+            plantExposure = "PartialSun";
         else if (LowSunRadioButton.IsChecked == true)
-            plantExposure = "Low light";
+            plantExposure = "LowSun";
 
         wateringFrequency = (int)(WateringFrequencyInput.Value ?? 7);
         
