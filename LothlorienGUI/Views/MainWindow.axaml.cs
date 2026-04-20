@@ -5,17 +5,14 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.LogicalTree;
 using Avalonia.Media;
+using LothlorienGUI.Models;
 using LothlorienGUI.ViewModels;
 
 namespace LothlorienGUI.Views;
 
 public partial class MainWindow : Window
 {
-    private string[] plantNames = new string[100];
-    private DateTimeOffset[]  plantDates = new DateTimeOffset[100];
-    private string[] plantLocations = new string[100];
-    private string[] plantExposures = new string[100];
-    private int[] plantWateringFrequencies = new int[100];
+    private Plant[] _plants = new Plant[100];
 
     private int plantTotal;
     public MainWindow()
@@ -24,7 +21,7 @@ public partial class MainWindow : Window
         plantTotal = 0;
     }
 
-    private Border CreatePlantCard(int index)
+    private Border CreatePlantCard(Plant plant)
     {
         var plantCard = new Border();
             plantCard.Width = 180;
@@ -56,7 +53,7 @@ public partial class MainWindow : Window
             iconText.HorizontalAlignment = HorizontalAlignment.Center;
             
             var nameText = new TextBlock();
-            nameText.Text = plantNames[index];
+            nameText.Text = plant.Name;
             nameText.FontSize = 14;
             nameText.FontWeight = FontWeight.Bold;
             nameText.Foreground = new SolidColorBrush(Color.Parse("#3A5A2A"));
@@ -65,13 +62,13 @@ public partial class MainWindow : Window
             nameText.TextWrapping = TextWrapping.Wrap;
 
             var locationText = new TextBlock();
-            locationText.Text = plantLocations[index];
+            locationText.Text = plant.Location;
             locationText.FontSize = 13;
             locationText.Foreground = new SolidColorBrush(Color.Parse("#90B070"));
             locationText.HorizontalAlignment = HorizontalAlignment.Center;
 
             var dateText = new TextBlock();
-            dateText.Text = plantDates[index].ToString("dd/MM/yyyy");
+            dateText.Text = plant.Date.ToString("dd/MM/yyyy");
             dateText.FontSize = 13;
             dateText.Foreground = new SolidColorBrush(Color.Parse("#90B070"));
             dateText.HorizontalAlignment = HorizontalAlignment.Center;
@@ -83,7 +80,7 @@ public partial class MainWindow : Window
             plantCardContent.Children.Add(locationText);
             plantCardContent.Children.Add(dateText);
 
-            plantCardButton.Tag = index;
+            plantCardButton.Tag = plant;
 
             return plantCard;
     }
@@ -96,43 +93,38 @@ public partial class MainWindow : Window
 
         if (plantInputWindow.confirmed)
         {
-            plantNames[plantTotal] = plantInputWindow.plantName;
-            plantDates[plantTotal] = plantInputWindow.purchaseDate ?? DateTimeOffset.Now;
-            plantLocations[plantTotal] = plantInputWindow.plantLocation;
-            plantExposures[plantTotal] = plantInputWindow.plantExposure;
-            plantWateringFrequencies[plantTotal] = plantInputWindow.wateringFrequency;
+            _plants[plantTotal] = new Plant(
+                plantInputWindow.plantName,
+                plantInputWindow.purchaseDate ?? DateTimeOffset.Now,
+                plantInputWindow.plantLocation,
+                plantInputWindow.plantExposure,
+                plantInputWindow.wateringFrequency);
             
             plantTotal++;
             
             if (DataContext is MainWindowViewModel vm)
                 vm.PlantCount = plantTotal;
             
-            CardPanel.Children.Add(CreatePlantCard(plantTotal - 1));
+            CardPanel.Children.Add(CreatePlantCard(_plants[plantTotal - 1]));
         }
     }
 
     private async void DisplayPlantInfo_OnClick(object? sender, RoutedEventArgs e)
     {
         var button = sender as Button;
-        var index = (int)button?.Tag;
+        var plant = (Plant)button?.Tag;
 
-        var plantInfoWindow = new PlantInfoWindow(
-            index,
-            plantNames[index], 
-            plantDates[index], 
-            plantLocations[index], 
-            plantExposures[index], 
-            plantWateringFrequencies[index]);
+        var plantInfoWindow = new PlantInfoWindow(plant);
 
         await plantInfoWindow.ShowDialog(this);
 
         if (plantInfoWindow.confirmed)
         {
-            plantNames[index] = plantInfoWindow.plantName;
-            plantDates[index] = plantInfoWindow.purchaseDate ?? DateTimeOffset.Now;
-            plantLocations[index] = plantInfoWindow.plantLocation;
-            plantExposures[index] = plantInfoWindow.plantExposure;
-            plantWateringFrequencies[index] = plantInfoWindow.wateringFrequency;
+            plant.Name = plantInfoWindow.Plant.Name;
+            plant.Date = plantInfoWindow.Plant.Date;
+            plant.Location = plantInfoWindow.Plant.Location;
+            plant.Exposure = plantInfoWindow.Plant.Exposure;
+            plant.WateringFrequency = plantInfoWindow.Plant.WateringFrequency;
         }
 
     }
