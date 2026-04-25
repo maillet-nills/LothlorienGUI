@@ -14,12 +14,19 @@ namespace LothlorienGUI.Views;
 public partial class MainWindow : Window
 {
     private Plant[] _plants = new Plant[100];
+    private string filePath = Path.Combine(AppContext.BaseDirectory, "plantsData.txt");
 
     private int plantTotal;
     public MainWindow()
     {
         InitializeComponent();
         plantTotal = 0;
+        Opened += MainWindow_Opened;
+    }
+
+    private void MainWindow_Opened(object? sender, EventArgs e)
+    {
+        LoadPlants();
     }
 
     private Border CreatePlantCard(Plant plant)
@@ -134,8 +141,6 @@ public partial class MainWindow : Window
 
     private void SavePlant()
     {
-        string filePath = Path.Combine(AppContext.BaseDirectory, "plantsData.txt");
-
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
             writer.WriteLine(
@@ -145,5 +150,33 @@ public partial class MainWindow : Window
                 _plants[plantTotal - 1].Exposure + "," +
                 _plants[plantTotal - 1].WateringFrequency);
         }
+    }
+
+    private void LoadPlants()
+    {
+        if (File.Exists(filePath))
+        {
+            foreach (string line in File.ReadAllLines(filePath))
+            {
+                string[] plant = line.Split(",");
+            
+                _plants[plantTotal] = new Plant(
+                    plant[0], 
+                    DateTimeOffset.Parse(plant[1]), 
+                    plant[2], 
+                    plant[3], 
+                    int.Parse(plant[4])
+                    );
+
+                plantTotal++;
+            
+                CardPanel.Children.Add(CreatePlantCard(_plants[plantTotal - 1]));
+            
+            }
+            
+            if (DataContext is MainWindowViewModel vm)
+                vm.PlantCount = plantTotal;
+        }
+        
     }
 }
