@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -106,6 +107,8 @@ public partial class MainWindow : Window
                 vm.PlantCount = plantTotal;
             
             CardPanel.Children.Add(CreatePlantCard(_plants[plantTotal - 1]));
+            
+            SavePlant();
         }
     }
 
@@ -127,5 +130,20 @@ public partial class MainWindow : Window
             plant.WateringFrequency = plantInfoWindow.Plant.WateringFrequency;
         }
 
+    }
+
+    private void SavePlant()
+    {
+        string filePath = Path.Combine(AppContext.BaseDirectory, "plantsData.txt");
+
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            writer.WriteLine(
+                _plants[plantTotal - 1].Name + "," + 
+                _plants[plantTotal - 1].Date.ToString("yyyy-MM-dd") + "," + 
+                _plants[plantTotal - 1].Location + "," +
+                _plants[plantTotal - 1].Exposure + "," +
+                _plants[plantTotal - 1].WateringFrequency);
+        }
     }
 }
