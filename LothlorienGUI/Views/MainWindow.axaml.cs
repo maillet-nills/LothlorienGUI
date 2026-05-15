@@ -135,6 +135,13 @@ public partial class MainWindow : Window
             plant.Location = plantInfoWindow.Plant.Location;
             plant.Exposure = plantInfoWindow.Plant.Exposure;
             plant.WateringFrequency = plantInfoWindow.Plant.WateringFrequency;
+            
+            var oldCard = button?.Parent as Border;
+            int cardIndex = CardPanel.Children.IndexOf(oldCard);
+            CardPanel.Children.RemoveAt(cardIndex);
+            CardPanel.Children.Insert(cardIndex, CreatePlantCard(plant));
+            
+            UpdatePlant(plant);
         }
 
     }
@@ -150,6 +157,20 @@ public partial class MainWindow : Window
                 _plants[plantTotal - 1].Exposure + "," +
                 _plants[plantTotal - 1].WateringFrequency);
         }
+    }
+    
+    private void UpdatePlant(Plant plant)
+    {
+        string[] lines = File.ReadAllLines(filePath);
+        int index = Array.IndexOf(_plants, plant);
+    
+        lines[index] = plant.Name + "," +
+                       plant.Date.ToString("yyyy-MM-dd") + "," +
+                       plant.Location + "," +
+                       plant.Exposure + "," +
+                       plant.WateringFrequency;
+    
+        File.WriteAllLines(filePath, lines);
     }
 
     private void LoadPlants()
